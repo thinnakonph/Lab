@@ -1,0 +1,39 @@
+//Lab4
+const nums1 = [1, -2, 3, 4];
+const nums2 = [8, 3, -8, 1];
+const combinedArray = nums1.concat(nums2);
+const modifiedArray = [5, ...nums1, -6, -1, ...nums2];
+const totalSum = combinedArray.reduce((sum, num) => sum + num, 0);
+console.log(combinedArray);
+console.log(modifiedArray);
+console.log(totalSum);
+-------------------------------------------------------------------
+//Lab6
+function profileInfo() {
+    const firstName = prompt('your firstname :');
+    const lastName = prompt('your lastname :');
+    const hobbiesInput = prompt('hobbies, separated by commas:');
+    const hobbies = hobbiesInput.split(',').map(hobby => hobby.trim());
+    const numOfHobbies = hobbies.length;
+    return {
+      firstName,
+      lastName,
+      hobbies,
+      numOfHobbies
+    };
+  }
+  const profile = profileInfo();
+  console.log(profile);
+  ---------------------------------------------------------------
+  //Lab10
+  function cloneObject(obj) {
+    return Object.assign({}, obj);
+  }
+  function cloneObject(obj) {
+    return { ...obj };
+  }
+  const originalObject = { key1: 'value1', key2: 'value2' };
+  const clonedObject1 = cloneObject(originalObject);
+  console.log(clonedObject1);
+  const clonedObject2 = cloneObject(originalObject);
+  console.log(clonedObject2);

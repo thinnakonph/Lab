@@ -1,0 +1,40 @@
+//Lab3
+const person = ['John', 'Jay', 'Jim', 'Jame'];
+const indexToRemove = person.indexOf('Jay');
+if (indexToRemove !== -1) {
+    person.splice(indexToRemove, 1);
+}
+person.splice(1, 2, 'Jack', 'Joe');
+
+console.log(person);
+-----------------------------------------------------------
+//Lab2
+const alphabets = ['a', 'b', 'a', 'c', 'a', 'd'];
+const indices = alphabets.reduce((acc, currentChar, currentIndex) => {
+  if (currentChar === 'a') {
+    acc.push(currentIndex);
+  }
+  return acc;
+}, []);
+console.log(indices);
+------------------------------------------------------------
+//Lab5
+const inventory = [
+    { name: 'apples', quantity: 2 },
+    { name: 'bananas', quantity: 0 },
+    { name: 'cherries', quantity: 5 }
+   ];
+const cherriesItem = inventory.find(item => item.name === 'cherries');
+console.log(cherriesItem);
+---------------------------------------------------------------
+//Lab9
+const array1 = ['Elephant', 'Ant', 'Cat', 'Eagle', 'Zebra'];
+const array2 = ['APPLE', 'oRanGE', 'PEACH', 'PaPAYA'];
+const array3 = ['Krabi', 'Chonburi', 'Buriram', 'Saraburi','Phrae'];
+const result1 = array1.filter(word => word[0] === 'E');
+const result2 = array2.filter(word => word === word.toUpperCase());
+const result3 = array3.filter(word => word.toLowerCase().includes('buri'));
+console.log(result1);
+console.log(result2);
+console.log(result3);
+----------------------------------------------------------------------------

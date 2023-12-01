@@ -1,0 +1,23 @@
+//lab1
+const array = [29, 17, 13, 47, 23, 31];
+let sum = 0;
+array.forEach(function(element) {
+  sum += element;
+});
+console.log(sum);
+---------------------------------------------------------
+//lab2
+const names = ['Mike', 'Sid', 'Jack', 'Bill'];
+names.forEach(function(name, index) {
+  console.log(`${index + 1}. ${name}`);
+});
+
+--------------------------------------------------------
+//lab3
+function squareArr(arr) {
+    return arr.map(number => number ** 2);
+  }
+  const arr = [2, 3, 5, 7, 11];
+  const squaredArray = squareArr(arr);
+  console.log(squaredArray); // [4, 9, 25, 49, 121]
+  
