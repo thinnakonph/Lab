@@ -1,4 +1,3 @@
-//Day 29
 // รับตัวเลขจากผู้ใช้
 let number1 = parseInt(prompt('กรุณาป้อนตัวเลขที่ 1:'));
 let number2 = parseInt(prompt('กรุณาป้อนตัวเลขที่ 2:'));
