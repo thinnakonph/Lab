@@ -1,0 +1,13 @@
+function Alphabet() {
+    let current = 'A'.charCodeAt(0);
+    const last = 'Z'.charCodeAt(0);
+    const intervalId = setInterval(() => {
+      console.log(String.fromCharCode(current));
+      if (current === last) {
+        clearInterval(intervalId);
+      } else {
+        current++;
+      }
+    }, 1000);
+  }
+  Alphabet();

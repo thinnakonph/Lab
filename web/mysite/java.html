@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-wide w3-padding w3-card">
+    <a href="#home" class="w3-bar-item w3-button"><b>BR</b> Architects</a>
+    <!-- Float links to the right. Hide them on small screens -->
+    <div class="w3-right w3-hide-small">
+      <a href="index.html" class="w3-bar-item w3-button">index</a>
+      <a href="java.html" class="w3-bar-item w3-button">java</a>
+      <a href="api.html" class="w3-bar-item w3-button">api</a>
+    </div>
+  </div>
+</div>
+
+<!-- Page content -->
+<div class="w3-content w3-padding" style="max-width:1564px">
+  <dir class="w3-content w3-margin-top w3-padding-64"> 
+    <h1>The Focument Object</h1>
+    <h2> calculatePoints</h2>
+    <p id="out">Hi</p>
+    <h1>The Focument Object</h1>
+    <h2> Alphabet A-Z </h2>
+    <p id = 'demo'>Hi</p>
+    <h1>The Focument Object</h1>
+    <h2> rollDice</h2>
+    <p id="output">Hi</p>
+
+
+
+
+
+
+
+
+
+
+  </dir>
+  
+
+
+<!-- End page content -->
+</div>
+<!-- Footer -->
+<footer class="w3-center w3-black w3-padding-16">
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+</footer>
+<script>
+function Alphabet() {
+  let current = 'A'.charCodeAt(0);
+  const last = 'Z'.charCodeAt(0);
+  const demoElement = document.getElementById('demo');
+
+  const intervalId = setInterval(() => {
+    demoElement.innerHTML = String.fromCharCode(current);
+    console.log(String.fromCharCode(+current));
+
+    if (current === last) {
+      current = 'A'.charCodeAt(0);
+    } else {
+      current++;
+    }
+  }, 1000);
+}
+
+Alphabet();
+
+function rollDice() {
+      return Math.floor(Math.random() * 6) + 1;
+    }
+    const outputElement = document.getElementById('output');
+    function rollContinuously() {
+      setInterval(() => {
+        const result = rollDice();
+        outputElement.innerHTML = 'ทอยลูกเต๋า: ' + result;
+      }, 1000);
+    }
+    rollContinuously()
+
+function calculatePoints(salesAmount) {
+    const point100Baht = 10;
+    return Math.floor(salesAmount / 100) * point100Baht;
+  }
+    const salesAmount = prompt("ใส่ราคา");
+    const pointsEarned = calculatePoints(parseFloat(salesAmount));
+    const Element = document.getElementById('out');
+    Element.innerHTML = `ยอดซื้อขาย ${salesAmount} บาท ได้แต้ม ${pointsEarned} คะแนน`;
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
