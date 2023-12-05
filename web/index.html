@@ -379,7 +379,52 @@
   <section id="portfolio" class="portfolio">
     <div class="container">
 
-    //
+      <h1>Bitcoin Price API </h1>
+      <button onclick="fetchBitcoinPrice()">Fetch Bitcoin Price</button>
+      <div id="kim"></div>
+      <hr>
+      <h1>Random Bored Activity</h1>
+      <button onclick="fetchRandomActivity()">Get Random Activity</button>
+      <div id="thin"></div>
+    
+    
+      <script>
+        function fetchBitcoinPrice() {
+          fetch('https://api.coindesk.com/v1/bpi/currentprice.json')
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return response.json();
+            })
+            .then(data => {
+              const bitcoinPrice = data.bpi.USD.rate;
+              document.getElementById('kim').innerHTML = `Bitcoin Price: $${bitcoinPrice}`;
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            });
+        }
+
+        function fetchRandomActivity() {
+          fetch('https://www.boredapi.com/api/activity')
+            .then(response => {
+              if (!response.ok) {
+                  throw new Error('Network response was not ok');
+                  }
+                  return response.json();
+                })
+                .then(data => {
+                  const activity = data.activity;
+                  document.getElementById('thin').innerHTML = `Random Activity: ${activity}`;
+                })
+                .catch(error => {
+                  console.error('Error:', error);
+                });
+            }
+
+            
+      </script>
 
     </div>
   </section><!-- End Portfolio Section -->
