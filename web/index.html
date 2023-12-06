@@ -9,6 +9,8 @@
   <meta content="" name="description">
   <meta content="" name="keywords">
 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   <!-- Favicons -->
   <link href="assets/img/thinn.jpg" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -26,14 +28,6 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: Personal
-  * Updated: Sep 18 2023 with Bootstrap v5.3.2
-  * Template URL: https://bootstrapmade.com/personal-free-resume-bootstrap-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
@@ -42,7 +36,7 @@
   <header id="header">
     <div class="container">
 
-      <h1><a href="index.html">Thinnakon</a></h1>
+      <h1><a href="index.html">Thinnakon Phuchomthong</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a> -->
       <h2>I'm a passionate <span>Web Developer</span> from Thailand </h2>
@@ -399,17 +393,130 @@
               </script>
               <hr>
             <!-- start Chart.js -->
+                <h2>Fruit Preferences</h2>
+                <canvas id="fruitChart" width="400" height="300"></canvas>
+                </div>
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <script src="yourDataFile.js"></script>
+                <script src="yourScript.js"></script>
+            <script>
+              const fruitData = {
+                  labels: ['Apple', 'Orange', 'Banana', 'Grapes', 'Watermelon'],
+                  datasets: [{
+                      label: 'Fruit Preferences',
+                      data: [30, 25, 20, 15, 10], // ตัวอย่างข้อมูลเริ่มต้น
+                      backgroundColor: [
+                          'rgba(255, 99, 132, 0.5)',
+                          'rgba(255, 159, 64, 0.5)',
+                          'rgba(255, 205, 86, 0.5)',
+                          'rgba(75, 192, 192, 0.5)',
+                          'rgba(54, 162, 235, 0.5)'
+                      ],
+                      borderColor: [
+                          'rgba(255, 99, 132, 1)',
+                          'rgba(255, 159, 64, 1)',
+                          'rgba(255, 205, 86, 1)',
+                          'rgba(75, 192, 192, 1)',
+                          'rgba(54, 162, 235, 1)'
+                      ],
+                      borderWidth: 1
+                  }]
+              };
+            document.addEventListener('DOMContentLoaded', function () {
+                drawChart(fruitData);
+            });
 
+            function updateChart(fruit) {
+                const newData = getNewData(fruit);
+                updateChartData(newData);
+            }
+            function getNewData(fruit) {
+                const newData = {
+                    labels: fruitData.labels,
+                    datasets: [{
+                        label: 'Fruit Preferences',
+                        data: fruitData.labels.map(label => (label === fruit) ? 40 : 20),
+                        backgroundColor: fruitData.datasets[0].backgroundColor,
+                        borderColor: fruitData.datasets[0].borderColor,
+                        borderWidth: 1
+                    }]
+                };
+                return newData;
+            }
+            function updateChartData(newData) {
+                const ctx = document.getElementById('fruitChart').getContext('2d');
+                const fruitChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: newData,
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }
+
+            function drawChart(data) {
+                const ctx = document.getElementById('fruitChart').getContext('2d');
+                const fruitChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: data,
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }
+            </script>
+          <br><hr>
+
+    <h2>Population</h2>
+    <canvas id="myChart" width="400" height="200"></canvas>
+    <script>
+        fetch('./country-by-population-density.json')
+            .then(response => response.json())
+            .then(data => {
+                const labels = data.map(entry => entry.country);
+                const populations = data.map(entry => entry.population);
+                const ctx = document.getElementById('myChart').getContext('2d');
+                const myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Population Density',
+                            data: populations,
+                            backgroundColor: 'blue',
+                            borderColor: 'red',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(error => console.error('Error fetching JSON:', error));
+    </script>
             <!-- end Chart.js -->
     </div>
   </section><!-- End Services Section -->
-
+  
   <!-- ======= Portfolio Section ======= -->
   <section id="portfolio" class="portfolio">
     <div class="container">
 
       <h1>Bitcoin Price API </h1>
-      < <div>
+      <div>
         <table id="btc_table"></table>
       </div>
       <hr>
@@ -436,7 +543,6 @@
                 }
               }
             }
-
             table += "</table>";
             document.getElementById("btc_table").innerHTML = table;
           })
@@ -444,8 +550,6 @@
       }
       setInterval(BTC, 30000);
       BTC();
-
-
       function fetchRandomActivity() {
           fetch('https://www.boredapi.com/api/activity')
             .then(response => {
@@ -462,8 +566,73 @@
                   console.error('Error:', error);
                 });
               }
-
       </script>
+      <br><hr>
+  <h1>Year PopulationUsa. 2013-2021 API </h1>
+  <div>
+    <label for="year">Enter Year:</label>
+    <input type="text" id="year" placeholder="Type a year">
+    <button onclick="fetchData()">Fetch Data</button>
+  </div>
+  <div id="usa"></div>
+
+  <script>
+    function fetchData() {
+      const yearInput = document.getElementById('year');
+      const year = yearInput.value;
+      if (year) {
+        const apiUrl = `https://datausa.io/api/data?drilldowns=Nation&measures=Population&year=${year}`;
+        fetch(apiUrl)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+          .then(data => {
+            const resultElement = document.getElementById('usa');
+            resultElement.innerHTML = `Population in ${year}: ${JSON.stringify(data.data)}`;
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            const resultElement = document.getElementById('usa');
+            resultElement.innerHTML = 'Error fetching data. Please try again.';
+          });
+      } else {
+        alert('Please enter a year.');
+      }
+    }
+  </script>
+  <br><hr>
+    <h1>Random Joke API </h1>
+    <button onclick="fetchRandomJoke()">Get Random Joke</button>
+    <div id="joke-container"></div>
+  
+    <script>
+      function fetchRandomJoke() {
+        // ให้ URL พร้อมกับ Endpoint ของ API
+        const apiUrl = 'https://official-joke-api.appspot.com/random_joke';
+  
+        // ดึงข้อมูลจาก API
+        fetch(apiUrl)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+          .then(data => {
+            // แสดงผลลัพธ์ที่ได้ใน Element ที่มี id เป็น "joke-container"
+            const jokeContainer = document.getElementById('joke-container');
+            jokeContainer.innerHTML = `<p><strong>Joke:</strong> ${data.setup}</p><p><strong>Punchline:</strong> ${data.delivery}</p>`;
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            const jokeContainer = document.getElementById('joke-container');
+            jokeContainer.innerHTML = 'Error fetching joke. Please try again.';
+          });
+      }
+    </script>
 
       <br><hr>
       <h1>API Google Sheet</h1>
