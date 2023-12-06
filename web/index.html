@@ -270,8 +270,10 @@
     <h1>The Focument Object</h1><hr> 
     <h2> Alphabet A-Z </h2>
     <p id = 'demo'>Hi</p>
+    <hr>
     <h2>Random rollDice</h2>
     <p id="output">Hi</p>
+    <hr>
     <!-- start Temperature Converter -->
     <h1>Temperature Converter</h1>
     <form id="temperatureForm">
@@ -285,8 +287,8 @@
       <button type="button" onclick="convertTemperature()">Convert</button>
     </form>
     <div id="result"></div>
+    <hr>
     <!-- end Temperature Converter -->
-
     <!-- start Shopping Points Converter -->
     <h1>Shopping Points Converter</h1>
     <form id="shoppingForm">
@@ -295,83 +297,110 @@
       <button type="button" onclick="convertToPoints()">Convert to Points</button>
     </form>
     <div id="results"></div>
+    <hr>
      <!-- end Shopping Points Converter -->
-
-        <script>
-            function Alphabet() {
-              let current = 'A'.charCodeAt(0);
-              const last = 'Z'.charCodeAt(0);
-              const demoElement = document.getElementById('demo');
-            
-              const intervalId = setInterval(() => {
-                demoElement.innerHTML = String.fromCharCode(current);
-                console.log(String.fromCharCode(+current));
-            
-                if (current === last) {
-                  current = 'A'.charCodeAt(0);
+     <script>
+        function Alphabet() {
+          let current = 'A'.charCodeAt(0);
+            const last = 'Z'.charCodeAt(0);
+            const demoElement = document.getElementById('demo');
+            const intervalId = setInterval(() => {
+              demoElement.innerHTML = String.fromCharCode(current);
+              console.log(String.fromCharCode(+current));
+              if (current === last) {
+                current = 'A'.charCodeAt(0);
                 } else {
                   current++;
                 }
-              }, 1000);
+              }, 3000);
             }
             Alphabet(); 
-            
-            function rollDice() {
-                return Math.floor(Math.random() * 6) + 1;
-                }
-                const outputElement = document.getElementById('output');
-                function rollContinuously() {
-                setInterval(() => {
-                    const result = rollDice();
-                    outputElement.innerHTML = 'ทอยลูกเต๋า: ' + result;
-                }, 1000);
-                }
-            rollContinuously()
-            function celsiusToFahrenheit(celsius) {
+     </script>
+     <script>
+        function rollDice() {
+          return Math.floor(Math.random() * 6) + 1;
+            }
+          const outputElement = document.getElementById('output');
+          function rollContinuously() {
+          setInterval(() => {
+              const result = rollDice();
+            outputElement.innerHTML = 'ทอยลูกเต๋า: ' + result;
+            }, 10000);
+            }
+        rollContinuously()
+     </script>
+     <script>
+       function celsiusToFahrenheit(celsius) {
                 return (celsius * 9/5) + 32;
                     }
-
                 function fahrenheitToCelsius(fahrenheit) {
                     return (fahrenheit - 32) * 5/9;
                     }
-
                     function convertTemperature() {
-                        const temperatureInput = document.getElementById('temperatureInput').value;
-                        const unitSelector = document.getElementById('unitSelector');
-                        const selectedUnit = unitSelector.options[unitSelector.selectedIndex].value;
-
+                     const temperatureInput = document.getElementById('temperatureInput').value;
+                     const unitSelector = document.getElementById('unitSelector');
+                     const selectedUnit = unitSelector.options[unitSelector.selectedIndex].value;
                     let convertedTemperature;
                     if (selectedUnit === 'celsius') {
-                        convertedTemperature = celsiusToFahrenheit(parseFloat(temperatureInput));
-                        document.getElementById('result').innerHTML = `${temperatureInput} Celsius is equal to ${convertedTemperature.toFixed(2)} Fahrenheit`;
+                   convertedTemperature = celsiusToFahrenheit(parseFloat(temperatureInput));
+                   document.getElementById('result').innerHTML = `${temperatureInput} Celsius is equal to ${convertedTemperature.toFixed(2)} Fahrenheit`;
                     } else {
-                        convertedTemperature = fahrenheitToCelsius(parseFloat(temperatureInput));
-                        document.getElementById('result').innerHTML = `${temperatureInput} Fahrenheit is equal to ${convertedTemperature.toFixed(2)} Celsius`;
-                        }
+                    convertedTemperature = fahrenheitToCelsius(parseFloat(temperatureInput));
+                  document.getElementById('result').innerHTML = `${temperatureInput} Fahrenheit is equal to ${convertedTemperature.toFixed(2)} Celsius`;
+                  }
+               }
+     </script>
+        <script>
+           function calculatePoints(purchaseAmount) {
+                const pointsPer100Baht = 1;
+                return Math.floor(purchaseAmount / 100) * pointsPer100Baht;
                     }
-
-                    function calculatePoints(purchaseAmount) {
-                        const pointsPer100Baht = 1;
-                        return Math.floor(purchaseAmount / 100) * pointsPer100Baht;
-                        }
-
-                            function convertToPoints() {
-                                const purchaseAmountInput = document.getElementById('purchaseAmount').value;
-                                const purchaseAmount = parseFloat(purchaseAmountInput);
-
-                            if (isNaN(purchaseAmount)) {
-                                alert('Please enter a valid numeric value for purchase amount.');
-                                return;
-                            }
-
-                            const pointsEarned = calculatePoints(purchaseAmount);
-                            document.getElementById('results').innerHTML = `Purchase amount: ${purchaseAmount.toFixed(2)} Baht<br>Points earned: ${pointsEarned} points`;
-                            }
-
-
+                function convertToPoints() {
+                  const purchaseAmountInput = document.getElementById('purchaseAmount').value;
+                    const purchaseAmount = parseFloat(purchaseAmountInput);
+                    if (isNaN(purchaseAmount)) {
+                    alert('Please enter a valid numeric value for purchase amount.');
+                    return;
+                      }
+                    const pointsEarned = calculatePoints(purchaseAmount);
+                    document.getElementById('results').innerHTML = `Purchase amount: ${purchaseAmount.toFixed(2)} Baht<br>Points earned: ${pointsEarned} points`;
+                    }
             </script>
-    </div>
 
+            <h2>กรุณาป้อนตัวเลขทั้ง 3 ตัว</h2>
+            <input type="number" id="number1" placeholder="ตัวเลขที่ 1">
+            <input type="number" id="number2" placeholder="ตัวเลขที่ 2">
+            <input type="number" id="number3" placeholder="ตัวเลขที่ 3">
+            <button onclick="sortNumbers()">เรียงลำดับ</button>
+            <div id="Hu"></div>
+            <script>
+              function sortNumbers() {
+                let number1 = parseInt(document.getElementById('number1').value);
+                let number2 = parseInt(document.getElementById('number2').value);
+                let number3 = parseInt(document.getElementById('number3').value);
+                let numbers = [number1, number2, number3];
+                numbers.sort(function(a, b) {
+                    return b - a;
+                });
+                document.getElementById('Hu').innerHTML = 'ตัวเลขที่เรียงกันจากมากไปน้อย: ' + numbers;
+              }
+            </script>
+            <hr>
+              <h2>กรุณาป้อนอายุของคุณ</h2>
+              <input type="number" id="ageInput" placeholder="อายุ">
+              <button onclick="checkAge()">ตรวจสอบ</button>
+              <div id="Hee"></div>
+              <script>
+                function checkAge() {
+                  let age = document.getElementById('ageInput').value;
+                  let message = (age >= 18) ? 'อนุญาต' : 'ไม่อนุญาต';
+                  document.getElementById('Hee').innerHTML = message;
+                }
+              </script>
+              <hr>
+            <!-- start Chart.js -->
+
+            <!-- end Chart.js -->
     </div>
   </section><!-- End Services Section -->
 
@@ -380,33 +409,44 @@
     <div class="container">
 
       <h1>Bitcoin Price API </h1>
-      <button onclick="fetchBitcoinPrice()">Fetch Bitcoin Price</button>
-      <div id="kim"></div>
+      < <div>
+        <table id="btc_table"></table>
+      </div>
       <hr>
       <h1>Random Bored Activity</h1>
       <button onclick="fetchRandomActivity()">Get Random Activity</button>
       <div id="thin"></div>
-    
-    
+      <br>
+      <script src="script.js"></script>
       <script>
-        function fetchBitcoinPrice() {
-          fetch('https://api.coindesk.com/v1/bpi/currentprice.json')
-            .then(response => {
-              if (!response.ok) {
-                throw new Error('Network response was not ok');
+      function BTC() {
+        fetch("https://api.coinbase.com/v2/exchange-rates?currency=BTC")
+          .then((response) => response.json())
+          .then((data) => {
+            const rates = data.data.rates;
+            let table =
+              '<h2>Exchange Rates for BTC</h2><table border="1"><tr><th>Currency</th><th>Rate</th></tr>';
+            let count = 0;
+            for (const currency in rates) {
+              if (rates.hasOwnProperty(currency)) {
+                table += `<tr><td>${currency}</td><td>${rates[currency]}</td></tr>`;
+                count++;
+                if (count === 10) {
+                  break;
+                }
               }
-              return response.json();
-            })
-            .then(data => {
-              const bitcoinPrice = data.bpi.USD.rate;
-              document.getElementById('kim').innerHTML = `Bitcoin Price: $${bitcoinPrice}`;
-            })
-            .catch(error => {
-              console.error('Error:', error);
-            });
-        }
+            }
 
-        function fetchRandomActivity() {
+            table += "</table>";
+            document.getElementById("btc_table").innerHTML = table;
+          })
+          .catch((error) => console.error("Error fetching data:", error));
+      }
+      setInterval(BTC, 30000);
+      BTC();
+
+
+      function fetchRandomActivity() {
           fetch('https://www.boredapi.com/api/activity')
             .then(response => {
               if (!response.ok) {
@@ -421,11 +461,28 @@
                 .catch(error => {
                   console.error('Error:', error);
                 });
-            }
+              }
 
-            
       </script>
 
+      <br><hr>
+      <h1>API Google Sheet</h1>
+      <br>
+      <div>
+           <form 
+        method="POST" 
+        action="https://script.google.com/macros/s/AKfycbwWr--dpQHCVySrBYYIN-WKttIp2edCtsg3eo_50fiLenNXPtYq9NiNQUbOUp7XbTbW/exec"
+        >
+        <input name="Email" type="email" placeholder="Email" required>
+        <input name="Name" type="text" placeholder="Name" required>
+        <input name="Topic" type="text" placeholder="Topic" required>
+        <button type="submit">Send</button>
+        </form>
+      </div>
+      <br>
+      <div>
+        <iframe style="width:100vh ;" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRslotlzY8nn_6RGQd-ZSX2rJ1wqSB8sDQfpgW7ZpJdgQd1FwTmoxThh45cxEhX3JKAPVWQZglOcPyM/pubhtml?widget=true&amp;headers=false"></iframe>      
+      </div>
     </div>
   </section><!-- End Portfolio Section -->
 
